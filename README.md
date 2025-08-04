@@ -226,7 +226,7 @@ npm run dev        # Desarrollo con nodemon
 
 ## 📧 Soporte
 
-Para soporte técnico, contacta a: [tu-email@beland.org]
+Para soporte técnico, contacta a: [gabriellazo48@gmail.com]
 
 ---
 
