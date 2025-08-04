@@ -9,7 +9,7 @@ const DONATION_CONFIG = {
       return "http://localhost:3001/api";
     }
 
-    return "https://donacionesbeland-production.up.railway.app";
+    return "https://donacionesbeland-production.up.railway.app/api";
   })(),
   currency: "USD",
   clientTransactionId: () => "B" + Date.now().toString().slice(-10), // Máximo 11 caracteres
