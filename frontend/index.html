@@ -1,0 +1,431 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Donaciones Beland</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://pay.payphone.app/v1/js/payphone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/donations.js"></script>
+  </head>
+  <body>
+    <div
+      class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+      style="
+        --select-button-svg: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(107,128,123)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z%27%3e%3c/path%3e%3c/svg%3e');
+        font-family: Manrope, 'Noto Sans', sans-serif;
+      "
+    >
+      <div class="layout-container flex h-full grow flex-col">
+        <header
+          class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f1f3f3] px-4 sm:px-6 lg:px-10 py-3"
+        >
+          <div class="flex items-center gap-4 text-[#131615]">
+            <div class="size-6">
+              <svg
+                viewBox="0 0 40 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.75483 3.44633C6.75483 1.60544 5.24363 0.112823 3.37982 0.112823C1.52609 0.112823 0.0249723 1.58554 0.00482305 3.41316C0.00482305 3.41648 0.00146484 3.4198 0.00146484 3.42311V12.349C0.00146484 12.349 0.132435 12.7536 0.639525 12.6243C2.58729 11.4832 4.48803 10.6606 6.43915 9.31397C6.78169 9.10168 6.74139 8.70034 6.74139 8.70034C6.74139 8.70034 6.75483 3.51599 6.75483 3.44633Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M27.0318 20.3792C25.8766 18.1336 24.2714 16.3557 22.2598 15.0887C21.793 14.7968 21.3162 14.5381 20.8225 14.3125C20.6647 14.2462 20.5035 14.1765 20.3423 14.1135C18.6195 13.4402 16.8195 13.2279 14.9994 13.1748C13.7501 13.1383 12.4908 13.1748 11.2415 13.1947C11.2348 12.5346 11.2315 11.8779 11.2248 11.2178C11.2214 10.7004 10.6404 10.362 10.1837 10.6274C9.12923 11.241 8.07139 11.8513 7.01691 12.465C4.81729 13.742 2.61766 15.0157 0.421388 16.2927C0.38109 16.3159 0.340791 16.3458 0.307209 16.3756C0.0116866 16.641 -0.00174626 17.1286 0.300493 17.3906C0.334075 17.4205 0.357582 17.447 0.397881 17.4702C3.27251 19.069 6.13706 20.671 8.9949 22.2731C9.4046 22.4954 9.85796 22.7408 10.2509 22.9597C10.7009 23.2118 11.3221 22.8967 11.3188 22.3693C11.3121 21.6927 11.3087 20.9331 11.302 20.2465C12.3464 19.6627 13.5486 19.3609 14.8483 19.3609C16.2587 19.3609 17.5516 19.7257 18.6833 20.4488C19.7412 21.1288 20.5942 22.0608 21.2188 23.2218C21.2255 23.2284 21.2289 23.2383 21.2356 23.245C21.2792 23.3213 21.3195 23.4009 21.3598 23.4805C22.0046 24.7874 22.3337 26.28 22.3337 27.9119C22.3337 29.5471 22.0046 31.0464 21.3598 32.3698C21.3061 32.4793 21.249 32.5821 21.1919 32.6883L21.1886 32.6916C20.5673 33.8426 19.7277 34.7713 18.6833 35.4513C17.5583 36.1876 16.2721 36.5624 14.8651 36.5624C13.421 36.5624 12.1214 36.1876 10.9964 35.4513C9.8546 34.705 8.95796 33.6767 8.32326 32.3897C7.76915 31.2686 7.45348 29.9982 7.37624 28.6084C7.35274 28.3928 7.34266 28.1806 7.33594 27.965C7.32587 27.5968 7.04042 27.2784 6.65759 27.2817C4.73669 27.2983 2.83258 27.1689 0.918403 27.3513C0.159448 27.4343 0.00161194 28.1772 0.00161194 28.1772V29.4277C0.00161194 29.4277 -0.00846269 39.4448 0.0217612 39.5875C0.112433 40.619 0.632956 42.5528 3.46057 42.5528C5.33109 42.5528 6.46953 41.5113 6.80871 40.085C8.16206 40.9408 9.93856 41.78 11.5001 42.1747C12.7259 42.5628 14.0557 42.7717 15.3856 42.7717C17.8337 42.7717 20.1845 42.1083 22.1826 40.8512C22.4479 40.6854 22.7031 40.5096 22.9516 40.3271C24.6475 39.0866 26.0076 37.468 27.0016 35.5043C28.1569 33.2256 28.7412 30.6716 28.7412 27.9185C28.7445 25.129 28.1669 22.5915 27.0318 20.3792Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            <h2
+              class="text-[#131615] text-lg font-bold leading-tight tracking-[-0.015em]"
+            >
+              Beland
+            </h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-4 lg:gap-8">
+            <div class="hidden md:flex items-center gap-6 lg:gap-9">
+              <a
+                class="text-[#131615] text-sm font-medium leading-normal"
+                href="#"
+                >Acerca de</a
+              >
+              <a
+                class="text-[#131615] text-sm font-medium leading-normal"
+                href="#"
+                >Impacto</a
+              >
+
+              <a
+                class="text-[#131615] text-sm font-medium leading-normal"
+                href="#"
+                >Contacto</a
+              >
+            </div>
+            <button
+              onclick="scrollToDonation()"
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#b8e4d9] text-[#131615] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#a3d4c7] transition-colors"
+            >
+              <span class="truncate">Donar</span>
+            </button>
+          </div>
+        </header>
+        <div class="px-4 sm:px-6 lg:px-40 flex flex-1 justify-center py-5">
+          <div
+            class="layout-content-container flex flex-col max-w-[960px] flex-1"
+          >
+            <div class="@container">
+              <div class="@[480px]:p-4">
+                <div
+                  class="flex min-h-[320px] sm:min-h-[400px] lg:min-h-[480px] flex-col gap-4 sm:gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4 sm:p-6"
+                  style="
+                    background-image: linear-gradient(
+                        rgba(0, 0, 0, 0.1) 0%,
+                        rgba(0, 0, 0, 0.4) 100%
+                      ),
+                      url('https://lh3.googleusercontent.com/aida-public/AB6AXuD4kqow2UqBbW6GvMWNYKtnN5vQvCzjZvcnC3jGot2N3E018gCPMiO6uNLrkoBE8N0Vf4I-wtdxHJ4doVJ8doQRapiKRhL8gzwmovqg4z3IGLEDVq4szv7ofXEEAQ08hwdwFfqhRLBdffErWo0ebqNOxm5Us9yPTPLLZlsjxc_4QmfKBjakmLjxCYBVTdKkvROtxSQ9wR2KippyGdGaC6L26IdWrO5jmE8XGrKbepRWZaPQJI8LVqm9bAW3pxDshU4Y5YvX9JmFwFou');
+                  "
+                >
+                  <div class="flex flex-col gap-2 text-center px-2">
+                    <h1
+                      class="text-white text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black leading-tight tracking-[-0.033em]"
+                    >
+                      Apoya Nuestra Misión
+                    </h1>
+                    <h2
+                      class="text-white text-sm sm:text-base font-normal leading-normal max-w-lg mx-auto"
+                    >
+                      Tu donación nos ayuda a reciclar más y a crear conciencia
+                      sobre la sostenibilidad ambiental.
+                    </h2>
+                  </div>
+                  <button
+                    onclick="scrollToDonation()"
+                    class="flex min-w-[84px] max-w-[280px] sm:max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 sm:h-12 px-4 sm:px-5 bg-[#b8e4d9] text-[#131615] text-sm sm:text-base font-bold leading-normal tracking-[0.015em] hover:bg-[#a3d4c7] transition-colors w-full sm:w-auto"
+                  >
+                    <span class="truncate">Donar Ahora</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <h2
+              class="text-[#131615] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+            >
+              Nuestro Impacto
+            </h2>
+            <p
+              class="text-[#131615] text-base font-normal leading-normal pb-3 pt-1 px-4"
+            >
+              Beland se dedica a aumentar las tasas de reciclaje y promover la
+              conciencia ambiental. Trabajamos con comunidades para implementar
+              programas de reciclaje efectivos y educar al público sobre la
+              importancia de la sostenibilidad. Tu apoyo marca una diferencia
+              real.
+            </p>
+            <div class="flex flex-wrap gap-4 p-4">
+              <div
+                class="flex min-w-[140px] sm:min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-4 sm:p-6 bg-[#f1f3f3]"
+              >
+                <p class="text-[#131615] text-sm sm:text-base font-medium leading-normal">
+                  Materiales Reciclados
+                </p>
+                <p
+                  class="text-[#131615] tracking-light text-xl sm:text-2xl font-bold leading-tight"
+                >
+                  500+ Toneladas
+                </p>
+                <p class="text-[#07882e] text-sm sm:text-base font-medium leading-normal">
+                  +15%
+                </p>
+              </div>
+              <div
+                class="flex min-w-[140px] sm:min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-4 sm:p-6 bg-[#f1f3f3]"
+              >
+                <p class="text-[#131615] text-sm sm:text-base font-medium leading-normal">
+                  Talleres Comunitarios
+                </p>
+                <p
+                  class="text-[#131615] tracking-light text-xl sm:text-2xl font-bold leading-tight"
+                >
+                  100+
+                </p>
+                <p class="text-[#07882e] text-sm sm:text-base font-medium leading-normal">
+                  +20%
+                </p>
+              </div>
+              <div
+                class="flex min-w-[140px] sm:min-w-[158px] flex-1 flex-col gap-2 rounded-xl p-4 sm:p-6 bg-[#f1f3f3]"
+              >
+                <p class="text-[#131615] text-sm sm:text-base font-medium leading-normal">
+                  Campañas de Concienciación
+                </p>
+                <p
+                  class="text-[#131615] tracking-light text-xl sm:text-2xl font-bold leading-tight"
+                >
+                  50+
+                </p>
+                <p class="text-[#07882e] text-sm sm:text-base font-medium leading-normal">
+                  +25%
+                </p>
+              </div>
+            </div>
+            <h2
+              class="text-[#131615] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+            >
+              Cómo Ayuda Tu Donación
+            </h2>
+            <div
+              class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4"
+            >
+              <div
+                class="flex flex-1 gap-3 rounded-lg border border-[#dee3e2] bg-white p-4 flex-col"
+              >
+                <div
+                  class="text-[#131615]"
+                  data-icon="Coins"
+                  data-size="24px"
+                  data-weight="regular"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M184,89.57V84c0-25.08-37.83-44-88-44S8,58.92,8,84v40c0,20.89,26.25,37.49,64,42.46V172c0,25.08,37.83,44,88,44s88-18.92,88-44V132C248,111.3,222.58,94.68,184,89.57ZM232,132c0,13.22-30.79,28-72,28-3.73,0-7.43-.13-11.08-.37C170.49,151.77,184,139,184,124V105.74C213.87,110.19,232,122.27,232,132ZM72,150.25V126.46A183.74,183.74,0,0,0,96,128a183.74,183.74,0,0,0,24-1.54v23.79A163,163,0,0,1,96,152,163,163,0,0,1,72,150.25Zm96-40.32V124c0,8.39-12.41,17.4-32,22.87V123.5C148.91,120.37,159.84,115.71,168,109.93ZM96,56c41.21,0,72,14.78,72,28s-30.79,28-72,28S24,97.22,24,84,54.79,56,96,56ZM24,124V109.93c8.16,5.78,19.09,10.44,32,13.57v23.37C36.41,141.4,24,132.39,24,124Zm64,48v-4.17c2.63.1,5.29.17,8,.17,3.88,0,7.67-.13,11.39-.35A121.92,121.92,0,0,0,120,171.41v23.46C100.41,189.4,88,180.39,88,172Zm48,26.25V174.4a179.48,179.48,0,0,0,24,1.6,183.74,183.74,0,0,0,24-1.54v23.79a165.45,165.45,0,0,1-48,0Zm64-3.38V171.5c12.91-3.13,23.84-7.79,32-13.57V172C232,180.39,219.59,189.4,200,194.87Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <h2 class="text-[#131615] text-base font-bold leading-tight">
+                    Programas de Reciclaje
+                  </h2>
+                  <p class="text-[#6b807b] text-sm font-normal leading-normal">
+                    Financia iniciativas e infraestructura de reciclaje.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex flex-1 gap-3 rounded-lg border border-[#dee3e2] bg-white p-4 flex-col"
+              >
+                <div
+                  class="text-[#131615]"
+                  data-icon="Users"
+                  data-size="24px"
+                  data-weight="regular"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <h2 class="text-[#131615] text-base font-bold leading-tight">
+                    Alcance Comunitario
+                  </h2>
+                  <p class="text-[#6b807b] text-sm font-normal leading-normal">
+                    Apoya talleres y participación comunitaria.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex flex-1 gap-3 rounded-lg border border-[#dee3e2] bg-white p-4 flex-col"
+              >
+                <div
+                  class="text-[#131615]"
+                  data-icon="Plant"
+                  data-size="24px"
+                  data-weight="regular"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path
+                      d="M247.63,39.89a8,8,0,0,0-7.52-7.52c-51.76-3-93.32,12.74-111.18,42.22-11.8,19.49-11.78,43.16-.16,65.74a71.34,71.34,0,0,0-14.17,27L98.33,151c7.82-16.33,7.52-33.35-1-47.49-13.2-21.79-43.67-33.47-81.5-31.25a8,8,0,0,0-7.52,7.52c-2.23,37.83,9.46,68.3,31.25,81.5A45.82,45.82,0,0,0,63.44,168,54.58,54.58,0,0,0,87,162.33l25,25V216a8,8,0,0,0,16,0V186.51a55.61,55.61,0,0,1,12.27-35,73.91,73.91,0,0,0,33.31,8.4,60.9,60.9,0,0,0,31.83-8.86C234.89,133.21,250.67,91.65,247.63,39.89ZM47.81,147.6C32.47,138.31,23.79,116.32,24,88c28.32-.24,50.31,8.47,59.6,23.81,4.85,8,5.64,17.33,2.46,26.94L61.65,114.34a8,8,0,0,0-11.31,11.31l24.41,24.41C65.14,153.24,55.82,152.45,47.81,147.6Zm149.31-10.22c-13.4,8.11-29.15,8.73-45.15,2l53.69-53.7a8,8,0,0,0-11.31-11.31L140.65,128c-6.76-16-6.15-31.76,2-45.15,13.94-23,47-35.82,89.33-34.83C232.94,90.34,220.14,123.44,197.12,137.38Z"
+                    ></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <h2 class="text-[#131615] text-base font-bold leading-tight">
+                    Educación Ambiental
+                  </h2>
+                  <p class="text-[#6b807b] text-sm font-normal leading-normal">
+                    Desarrolla materiales y campañas educativas.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <h2
+              class="text-[#131615] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+            >
+              Dona Hoy
+            </h2>
+            <div class="flex w-full max-w-[480px] mx-auto flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-0 flex-1">
+                <select
+                  id="donationAmount"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#131615] focus:outline-0 focus:ring-0 border border-[#dee3e2] bg-white focus:border-[#dee3e2] h-12 sm:h-14 bg-[image:--select-button-svg] placeholder:text-[#6b807b] p-3 sm:p-[15px] text-sm sm:text-base font-normal leading-normal"
+                >
+                  <option value="">Seleccionar Cantidad</option>
+                  <option value="10">$10 USD</option>
+                  <option value="25">$25 USD</option>
+                  <option value="50">$50 USD</option>
+                  <option value="100">$100 USD</option>
+                  <option value="250">$250 USD</option>
+                </select>
+              </label>
+            </div>
+            <div class="flex w-full max-w-[480px] mx-auto flex-wrap items-end gap-4 px-4 py-3">
+              <label class="flex flex-col min-w-0 flex-1">
+                <input
+                  id="customAmount"
+                  type="number"
+                  min="1"
+                  step="0.01"
+                  placeholder="Otra Cantidad (USD)"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#131615] focus:outline-0 focus:ring-0 border border-[#dee3e2] bg-white focus:border-[#dee3e2] h-12 sm:h-14 placeholder:text-[#6b807b] p-3 sm:p-[15px] text-sm sm:text-base font-normal leading-normal"
+                  value=""
+                />
+              </label>
+            </div>
+            <div class="flex px-4 py-3 justify-center">
+              <button
+                id="donateButton"
+                onclick="processDonation()"
+                class="flex min-w-[84px] w-full max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 sm:h-12 px-5 bg-[#b8e4d9] text-[#131615] text-sm sm:text-base font-bold leading-normal tracking-[0.015em] hover:bg-[#a3d4c7] transition-colors"
+              >
+                <span class="truncate">Donar con Payphone</span>
+              </button>
+            </div>
+            <p
+              class="text-[#6b807b] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center"
+            >
+              Pago seguro impulsado por Payphone
+            </p>
+          </div>
+        </div>
+        <footer class="flex justify-center">
+          <div class="flex max-w-[960px] flex-1 flex-col">
+            <footer
+              class="flex flex-col gap-6 px-4 sm:px-5 py-8 sm:py-10 text-center @container"
+            >
+              <div
+                class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 @[480px]:flex-row @[480px]:justify-around"
+              >
+                <a
+                  class="text-[#6b807b] text-sm sm:text-base font-normal leading-normal min-w-32 sm:min-w-40"
+                  href="#"
+                  >Acerca de</a
+                >
+                <a
+                  class="text-[#6b807b] text-sm sm:text-base font-normal leading-normal min-w-32 sm:min-w-40"
+                  href="#"
+                  >Impacto</a
+                >
+                <a
+                  class="text-[#6b807b] text-sm sm:text-base font-normal leading-normal min-w-32 sm:min-w-40"
+                  href="#"
+                  >Donar</a
+                >
+                <a
+                  class="text-[#6b807b] text-sm sm:text-base font-normal leading-normal min-w-32 sm:min-w-40"
+                  href="#"
+                  >Contacto</a
+                >
+              </div>
+              <div class="flex flex-wrap justify-center gap-4">
+                <a href="#" class="p-2">
+                  <div
+                    class="text-[#6b807b]"
+                    data-icon="TwitterLogo"
+                    data-size="24px"
+                    data-weight="regular"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24px"
+                      height="24px"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </a>
+                <a href="#">
+                  <div
+                    class="text-[#6b807b]"
+                    data-icon="FacebookLogo"
+                    data-size="24px"
+                    data-weight="regular"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24px"
+                      height="24px"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </a>
+                <a href="#">
+                  <div
+                    class="text-[#6b807b]"
+                    data-icon="InstagramLogo"
+                    data-size="24px"
+                    data-weight="regular"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24px"
+                      height="24px"
+                      fill="currentColor"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"
+                      ></path>
+                    </svg>
+                  </div>
+                </a>
+              </div>
+              <p class="text-[#6b807b] text-sm sm:text-base font-normal leading-normal">
+                © 2025 Beland. Todos los derechos reservados.
+              </p>
+              </p>
+            </footer>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
