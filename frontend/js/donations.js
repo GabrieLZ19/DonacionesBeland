@@ -1,9 +1,23 @@
 // Configuración para el frontend (sin variables sensibles)
 const DONATION_CONFIG = {
-  apiUrl: "http://localhost:3001/api", // URL del backend
+  // Detectar automáticamente el entorno
+  apiUrl: (() => {
+    const hostname = window.location.hostname;
+
+    // Si estamos en localhost o 127.0.0.1, usar desarrollo
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return "http://localhost:3001/api";
+    }
+
+    return "https://donacionesbeland-production.up.railway.app/";
+  })(),
   currency: "USD",
   clientTransactionId: () => "B" + Date.now().toString().slice(-10), // Máximo 11 caracteres
 };
+
+// Debug: mostrar la URL que se está usando
+console.log("🌐 API URL configurada:", DONATION_CONFIG.apiUrl);
+console.log("📍 Hostname actual:", window.location.hostname);
 
 // Función para procesar la donación
 function processDonation() {
